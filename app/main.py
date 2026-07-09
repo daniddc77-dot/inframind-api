@@ -17,9 +17,9 @@ app.mount(
 @app.get("/")
 def home(request: Request):
     return templates.TemplateResponse(
-        "index.html",
-        {
-            "request": request,
+        request=request,
+        name="index.html",
+        context={
             "version": "1.0.0",
             "time": datetime.now()
         }
