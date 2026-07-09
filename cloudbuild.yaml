@@ -27,6 +27,10 @@ steps:
   - --allow-unauthenticated
   - --quiet
   
-  
+
 images:
 - europe-southwest1-docker.pkg.dev/$PROJECT_ID/inframind/inframind-api:$SHORT_SHA
+
+
+options:
+  logging: CLOUD_LOGGING_ONLY
