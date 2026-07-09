@@ -1,36 +1,34 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
+from fastapi.templating import Jinja2Templates
+from fastapi.staticfiles import StaticFiles
 from datetime import datetime
-import os
 
-app = FastAPI(
-    title="Inframind API 🚀",
-    version="2.0.0"
+app = FastAPI()
+
+templates = Jinja2Templates(directory="app/templates")
+
+app.mount(
+    "/static",
+    StaticFiles(directory="app/static"),
+    name="static"
 )
 
 
-VERSION = "v2 - deploy automático con Cloud Build"
-
-
 @app.get("/")
-def home():
+def home(request: Request):
+    return templates.TemplateResponse(
+        "index.html",
+        {
+            "request": request,
+            "version": "1.0.0",
+            "time": datetime.now()
+        }
+    )
+
+
+@app.get("/api/status")
+def status():
     return {
-        "message": "🔥 Nueva versión desplegada",
-        "version": VERSION,
-        "deployed_at": datetime.now().isoformat(),
-        "container": os.getenv("HOSTNAME")
-    }
-
-
-@app.get("/health")
-def health():
-    return {
-        "status": "ok",
-        "service": "inframind-api"
-    }
-
-
-@app.get("/test")
-def test():
-    return {
-        "mensaje": "Cambio realizado desde Git → Cloud Build → Cloud Run 🚀"
+        "status": "online",
+        "service": "Inframind API"
     }
