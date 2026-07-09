@@ -6,10 +6,12 @@ steps:
   - europe-southwest1-docker.pkg.dev/$PROJECT_ID/inframind/inframind-api:$SHORT_SHA
   - .
 
+
 - name: gcr.io/cloud-builders/docker
   args:
   - push
   - europe-southwest1-docker.pkg.dev/$PROJECT_ID/inframind/inframind-api:$SHORT_SHA
+
 
 - name: gcr.io/cloud-builders/gcloud
   args:
@@ -24,6 +26,7 @@ steps:
   - managed
   - --allow-unauthenticated
   - --quiet
+  
   
 - images:
   - europe-southwest1-docker.pkg.dev/$PROJECT_ID/inframind/inframind-api:$SHORT_SHA
