@@ -28,5 +28,5 @@ steps:
   - --quiet
   
   
-- images:
-  - europe-southwest1-docker.pkg.dev/$PROJECT_ID/inframind/inframind-api:$SHORT_SHA
+images:
+- europe-southwest1-docker.pkg.dev/$PROJECT_ID/inframind/inframind-api:$SHORT_SHA
